@@ -10,7 +10,7 @@ public class MDPModelStateGrid extends MDPModelState {
 
 
     public String getName() {
-        return String.format("({x}, {y})", x, y);
+        return String.format("(%d, %d)", x, y);
     }
 
     public MDPModelStateGrid(int x, int y, double reward) {

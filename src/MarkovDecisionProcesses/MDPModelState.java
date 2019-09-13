@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class MDPModelState {
     //Maps each action to a probability to enter another state
-    Map<String, StateProbabilityRow> actionToStochasticStateTransitionMap;
+    public Map<String, StateProbabilityRow> actionToStochasticStateTransitionMap;
     double reward;
 
     public abstract String getName();
