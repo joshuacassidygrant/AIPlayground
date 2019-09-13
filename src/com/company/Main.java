@@ -1,9 +1,6 @@
 package com.company;
 
-import MarkovDecisionProcesses.MDPModel;
-import MarkovDecisionProcesses.MDPModelState;
-import MarkovDecisionProcesses.MDPModelStateGrid;
-import MarkovDecisionProcesses.SRE;
+import MarkovDecisionProcesses.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +10,14 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         System.out.println("Running sample MDP");
-        runSampleMDP();
+        MDPModel model= createSampleMDP();
+        ValueIterationSolver vis = new ValueIterationSolver(model, 10, 1);
+        MDPPolicy optimalPolicy = vis.getPolicy();
+        System.out.println("Best Policy:");
+        System.out.println(optimalPolicy);
     }
 
-    public static void runSampleMDP(){
+    public static MDPModel createSampleMDP(){
         MDPModel model = new MDPModel();
 
         MDPModelState s11 = new MDPModelStateGrid(1, 1, -0.04);
@@ -98,7 +99,7 @@ public class Main {
         s43.addActionToStochasticStateTransitionMap("DOWN", new SRE[] {new SRE(s42, 0.8), new SRE(s33, 0.1), new SRE(s43, 0.1)});
         s43.addActionToStochasticStateTransitionMap("LEFT", new SRE[] {new SRE(s33, 0.8), new SRE(s42, 0.1), new SRE(s43, 0.1)});
 
-
+        return model;
 
     }
 }
