@@ -31,6 +31,18 @@ public class Main {
         MDPModelState s42 = new MDPModelStateGrid(4, 2, -1);
         MDPModelState s43 = new MDPModelStateGrid(4, 3, 1);
 
+        model.addState(s11);
+        model.addState(s12);
+        model.addState(s13);
+        model.addState(s21);
+        model.addState(s23);
+        model.addState(s31);
+        model.addState(s32);
+        model.addState(s33);
+        model.addState(s41);
+        model.addState(s42);
+        model.addState(s43);
+
         s11.addActionToStochasticStateTransitionMap("UP", new SRE[] {new SRE(s12, 0.8), new SRE(s11, 0.1), new SRE(s21, 0.1)});
         s11.addActionToStochasticStateTransitionMap("RIGHT", new SRE[] {new SRE(s21, 0.8), new SRE(s11, 0.1), new SRE(s12, 0.1)});
         s11.addActionToStochasticStateTransitionMap("DOWN", new SRE[] {new SRE(s11, 0.9), new SRE(s21, 0.1)});
