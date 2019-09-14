@@ -1,5 +1,6 @@
 package MarkovDecisionProcesses;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,9 @@ public class ValueIterationSolver {
                 double val = state.reward + gamma * getMaxRewardProbability(state);
                 summedValues.put(state, val);
             }
+
+            printSummedValuesGrid();
+
         }
     }
 
@@ -61,5 +65,34 @@ public class ValueIterationSolver {
             total += summedValues.get(cell.state) * cell.chance;
         }
         return total;
+    }
+
+    private void printSummedValuesGrid() {
+        //TODO: allow arbitrary grid size
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        MDPModelStateGrid stateGrid[][] = new MDPModelStateGrid[3][4];
+        for (MDPModelState state : summedValues.keySet() ) {
+            MDPModelStateGrid gS = (MDPModelStateGrid) state;
+            stateGrid[gS.y-1][gS.x-1] = gS;
+        }
+        StringBuilder b = new StringBuilder();
+        b.append(" |\n  ---------------------------\n");
+
+        for (int i = 2; i >= 0; i--) {
+            for (int j = 0; j <= 3; j++) {
+                if (stateGrid[i][j] != null) {
+                    b.append(" | ");
+                    //b.append(stateGrid[i][j].getName());
+                    //b.append(":");
+                    b.append(df.format(summedValues.get(stateGrid[i][j])));
+                } else {
+                    b.append(" | ####");
+                }
+            }
+            b.append(" |\n  ---------------------------\n");
+        }
+
+        System.out.println(b.toString());
     }
 }
